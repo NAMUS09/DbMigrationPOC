@@ -4,7 +4,7 @@ namespace Cetas.DbMigration.Core.Infrastructure
 {
     /// <summary>
     /// Classes implementing this interface provide information about types 
-    /// to various services in the Nop engine.
+    /// to various services in the cetas engine.
     /// </summary>
     public interface ITypeFinder
     {

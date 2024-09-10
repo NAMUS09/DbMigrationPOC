@@ -7,6 +7,7 @@ using FluentMigrator.Builders.Create;
 using FluentMigrator.Builders.Create.Table;
 using FluentMigrator.Infrastructure.Extensions;
 using FluentMigrator.Model;
+using FluentMigrator.SqlServer;
 using LinqToDB.Mapping;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
@@ -30,7 +31,7 @@ namespace Cetas.DbMigration.Data.Extensions
             [typeof(string)] = c => c.AsString(int.MaxValue).Nullable(),
             [typeof(bool)] = c => c.AsBoolean(),
             [typeof(decimal)] = c => c.AsDecimal(18, 4),
-            [typeof(DateTime)] = c => c.AsNopDateTime2(),
+            [typeof(DateTime)] = c => c.AsCetasDateTime2(),
             [typeof(byte[])] = c => c.AsBinary(int.MaxValue),
             [typeof(Guid)] = c => c.AsGuid()
         };
@@ -54,12 +55,22 @@ namespace Cetas.DbMigration.Data.Extensions
                 create.Nullable();
         }
 
+        private static string GetUniqueConstraintName(Type type, params string[] columns)
+        {
+            var name = $"UQ_{type.Name}";
+
+            foreach (var column in columns)
+                name += $"_{column}";
+
+            return name;
+        }
+
         #endregion
 
         /// <summary>
         /// Defines the column type as date that is combined with a time of day and a specified precision
         /// </summary>
-        public static ICreateTableColumnOptionOrWithColumnSyntax AsNopDateTime2(this ICreateTableColumnAsTypeSyntax syntax)
+        public static ICreateTableColumnOptionOrWithColumnSyntax AsCetasDateTime2(this ICreateTableColumnAsTypeSyntax syntax)
         {
             var dataSettings = DataSettingsManager.LoadSettings();
 
@@ -121,6 +132,26 @@ namespace Cetas.DbMigration.Data.Extensions
             var type = typeof(TEntity);
             var builder = expressionRoot.Table(NameCompatibilityManager.GetTableName(type)) as CreateTableExpressionBuilder;
             builder?.RetrieveTableExpressions(type);
+        }
+
+        public static void UniqueClusteredConstraintFor<TEntity>(this ICreateExpressionRoot expressionRoot, params string[] columns) where TEntity : BaseEntity
+        {
+            Type type = typeof(TEntity);
+
+            expressionRoot.UniqueConstraint(GetUniqueConstraintName(type, columns))
+                            .OnTable(type.Name)
+                            .Columns(columns)
+                            .Clustered();
+        }
+
+        public static void UniqueNonClusteredConstraintFor<TEntity>(this ICreateExpressionRoot expressionRoot, params string[] columns) where TEntity : BaseEntity
+        {
+            Type type = typeof(TEntity);
+
+            expressionRoot.UniqueConstraint(GetUniqueConstraintName(type, columns))
+                            .OnTable(type.Name)
+                            .Columns(columns)
+                            .NonClustered();
         }
 
         /// <summary>

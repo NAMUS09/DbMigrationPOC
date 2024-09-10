@@ -20,9 +20,9 @@ namespace Cetas.DbMigration.Data.Migrations
             return GetVersion(dateTime) + (int)migrationType;
         }
 
-        protected static string GetDescription(string nopVersion, UpdateMigrationType migrationType)
+        protected static string GetDescription(string cetasVersion, UpdateMigrationType migrationType)
         {
-            return string.Format(CetasMigrationDefaults.UpdateMigrationDescription, nopVersion, migrationType.ToString());
+            return string.Format(CetasMigrationDefaults.UpdateMigrationDescription, cetasVersion, migrationType.ToString());
         }
 
         #endregion

@@ -3,19 +3,19 @@
 namespace Cetas.DbMigration.Core.Infrastructure
 {
     /// <summary>
-    /// Provides access to the singleton instance of the Nop engine.
+    /// Provides access to the singleton instance of the Cetas engine.
     /// </summary>
     public partial class EngineContext
     {
         #region Methods
 
         /// <summary>
-        /// Create a static instance of the Nop engine.
+        /// Create a static instance of the Cetas engine.
         /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public static IEngine Create()
         {
-            //create NopEngine as engine
+            //create CetasEngine as engine
             return Singleton<IEngine>.Instance ?? (Singleton<IEngine>.Instance = new CetasEngine());
         }
 
@@ -34,7 +34,7 @@ namespace Cetas.DbMigration.Core.Infrastructure
         #region Properties
 
         /// <summary>
-        /// Gets the singleton Nop engine used to access Nop services.
+        /// Gets the singleton cetas engine used to access cetas services.
         /// </summary>
         public static IEngine Current
         {

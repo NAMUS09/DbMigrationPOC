@@ -34,7 +34,7 @@ namespace DbMigrationPOC.Extensions
                 //pluginService.InstallPluginsAsync().Wait();
                 //pluginService.UpdatePluginsAsync().Wait();
 
-                //update nopCommerce core and db
+                //update cetas core and db
                 var migrationManager = engine.Resolve<IMigrationManager>();
                 var assembly = Assembly.GetAssembly(typeof(ApplicationBuilderExtensions))!;
                 migrationManager.ApplyUpMigrations(assembly, MigrationProcessType.Update);

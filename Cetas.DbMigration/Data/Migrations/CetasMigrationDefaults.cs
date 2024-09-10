@@ -13,7 +13,7 @@
         /// <summary>
         /// Gets the format string to create the description of update migration
         /// <remarks>
-        /// 0 - nopCommerce version
+        /// 0 - cetas version
         /// 1 - update migration type
         /// </remarks>
         /// </summary>
@@ -22,7 +22,7 @@
         /// <summary>
         /// Gets the format string to create the description prefix of update migrations
         /// <remarks>
-        /// 0 - nopCommerce version
+        /// 0 - cetas version
         /// </remarks>
         /// </summary>
         public static string UpdateMigrationDescriptionPrefix { get; } = "cetas version {0}. Update";

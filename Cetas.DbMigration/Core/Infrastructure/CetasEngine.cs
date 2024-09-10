@@ -8,7 +8,7 @@ using System.Reflection;
 namespace Cetas.DbMigration.Core.Infrastructure
 {
     /// <summary>
-    /// Represents Nop engine
+    /// Represents Cetas engine
     /// </summary>
     public partial class CetasEngine : IEngine
     {

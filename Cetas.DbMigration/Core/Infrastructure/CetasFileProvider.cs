@@ -12,7 +12,7 @@ namespace Cetas.DbMigration.Core.Infrastructure
     public partial class CetasFileProvider : PhysicalFileProvider, ICetasFileProvider
     {
         /// <summary>
-        /// Initializes a new instance of a NopFileProvider
+        /// Initializes a new instance of a CetasFileProvider
         /// </summary>
         /// <param name="webHostEnvironment">Hosting environment</param>
         public CetasFileProvider(IHostEnvironment webHostEnvironment)

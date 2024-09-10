@@ -7,7 +7,7 @@ namespace Cetas.DbMigration.Data.Mapping.Builders.Users
     /// <summary>
     /// Represents a log entity builder
     /// </summary>
-    public partial class UserBuilder : NopEntityBuilder<User>
+    public partial class UserBuilder : CetasEntityBuilder<User>
     {
         #region Methods
 
